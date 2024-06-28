@@ -1,0 +1,38 @@
+# Created by https://www.toptal.com/developers/gitignore/api/audio,video
+# Edit at https://www.toptal.com/developers/gitignore?templates=audio,video
+
+### Audio ###
+*.aif
+*.flac
+*.iff
+*.m3u
+*.m4a
+*.mid
+*.mp2
+*.mp3
+*.mpa
+*.ogg
+*.opus
+*.ra
+*.wav
+*.wma
+
+### Video ###
+*.3g2
+*.3gp
+*.asf
+*.asx
+*.avi
+*.flv
+*.mkv
+*.mov
+*.mp4
+*.mpg
+*.ogv
+*.rm
+*.swf
+*.vob
+*.webm
+*.wmv
+
+# End of https://www.toptal.com/developers/gitignore/api/audio,video
