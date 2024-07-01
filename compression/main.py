@@ -7,31 +7,44 @@ class FFmpeg:
     input: str
     output: str
     format: str
-    bitrate: str | None
-    freq: int | None
+    bitrate: int | None
+    fpass: tuple[int, int] | None
 
     def __init__(
         self,
         input="pipe:0",
         output="pipe:1",
-        format="mp3",
+        format="amr",
         bitrate=None,
-        freq=None,
+        fpass=None,
     ):
         self.input = input
         self.output = output
         self.format = format
         self.bitrate = bitrate
-        self.freq = freq
+        self.fpass = fpass
 
     def __get_cmd(self) -> list[str]:
-        cmd = ["ffmpeg", "-i", self.input, "-f", self.format, self.output]
+        cmd = [
+            "ffmpeg",
+            "-i",
+            self.input,
+            "-f",
+            self.format,
+            "-ac",
+            "1",
+            "-ar",
+            "8000",
+        ]
 
         if self.bitrate is not None:
-            cmd += ["-b:a", self.bitrate]
-        if self.freq is not None:
-            cmd += ["-ar", str(self.freq)]
-        return cmd
+            cmd += ["-b:a", str(self.bitrate)]
+        if self.fpass:
+            cmd += [
+                "-filter:a",
+                f"highpass=f={self.fpass[0]},lowpass=f={self.fpass[1]}",
+            ]
+        return cmd + [self.output]
 
     def run(self):
         cmd = self.__get_cmd()
@@ -40,7 +53,7 @@ class FFmpeg:
 
 
 def main():
-    ff = FFmpeg(bitrate="128k", freq=8000)
+    ff = FFmpeg(bitrate=12200, fpass=[200, 3400])
     ff.run()
 
 
