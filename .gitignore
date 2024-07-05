@@ -3,6 +3,7 @@
 
 ### Audio ###
 *.aif
+*.amr
 *.flac
 *.iff
 *.m3u
